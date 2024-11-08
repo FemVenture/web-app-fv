@@ -12,6 +12,11 @@ h1 {
 }
 
 h2 {
-    font-size: 24px;
+    font-size: 48px;
     font-family: 'Inria Sans', sans-serif;
 }
+
+h3 {
+    font-size: 24px;
+    font-family: 'Inria Sans', sans-serif;
+}	
