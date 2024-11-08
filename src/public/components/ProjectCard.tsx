@@ -26,13 +26,15 @@ export const ProjectCard = ({
   return (
     <div
       className={`rounded-lg overflow-hidden shadow-lg bg-white ${
-        cardType === "variant" ? "max-w-xs" : "max-w-sm cursor-pointer"
+        cardType === "variant" ? "w-[300px]" : "w-[300px] cursor-pointer"
       }`}
       onClick={cardType === "default" ? () => navigate(link) : undefined}
     >
       {cardType === "variant" ? (
         <>
-          <div className="h-[500px] w-[300px] ">
+          <div className="h-[500px] w-full">
+            {" "}
+            {/* Usar w-full para ocupar todo el ancho */}
             <img
               className="object-cover h-full w-full rounded-lg"
               src={image}
@@ -71,7 +73,9 @@ export const ProjectCard = ({
         </>
       ) : (
         <>
-          <div className="relative h-[500px] w-[300px]">
+          <div className="relative h-[500px] w-full">
+            {" "}
+            {/* Usar w-full para ocupar todo el ancho */}
             <img
               className="object-cover w-full h-full"
               src={image}

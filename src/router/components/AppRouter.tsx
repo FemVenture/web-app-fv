@@ -6,6 +6,7 @@ import { Home } from "../../public/pages/Home";
 import { Login } from "../../auth/pages/LoginPage";
 import { Register } from "../../auth/pages/RegisterPage";
 import { ProfielPage } from "../../profile/page/ProfilePage";
+import { Explore } from "../../public/pages/Explore";
 
 export const AppRouter = (): ReactElement => {
   //const isLogged = useAuthentication((state) => state.isLoggedIn())
@@ -19,7 +20,8 @@ export const AppRouter = (): ReactElement => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<ProfielPage/>}/>
+        <Route path="/profile" element={<ProfielPage />} />
+        <Route path="/explore" element={<Explore />} />
       </Route>
       <Route
         element={
