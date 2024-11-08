@@ -1,6 +1,5 @@
 import { ReactElement } from "react";
 
-type ProjectPage
 export const ProjectPage = (): ReactElement => {
 
 
