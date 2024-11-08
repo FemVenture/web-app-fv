@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { SearchBar } from "../ui/Searchbar";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -74,6 +75,14 @@ const Navbar = () => {
             <a href="#social" className="underline-offset-4 font-light">
               Comunidad
             </a>
+          </div>
+
+          <div className="hidden xl:flex space-x-16 items-center">
+            <SearchBar
+              value=""
+              placeholder="Buscar un emprendimiento"
+              onChange={() => {}}
+            />
           </div>
 
           <div className="hidden xl:flex space-x-16 items-center">
