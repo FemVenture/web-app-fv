@@ -25,7 +25,7 @@ export const ProjectCard = ({
 
   return (
     <div
-      className={`rounded-lg overflow-hidden shadow-lg bg-white ${
+      className={`rounded-lg overflow-hidden bg-white ${
         cardType === "variant" ? "w-[300px]" : "w-[300px] cursor-pointer"
       }`}
       onClick={cardType === "default" ? () => navigate(link) : undefined}
