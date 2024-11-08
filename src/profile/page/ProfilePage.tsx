@@ -19,8 +19,8 @@ export const ProfielPage = (): ReactElement => {
                     <p className="text-lg text-textSecondary">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent posuere lectus sit amet risus aliquam blandit. Sed lacinia turpis ullamcorper orci lobortis commodo. Aliquam ac aliquam erat. Vivamus eros justo, tempor vel iaculis quis, ultricies ac enim. Maecenas suscipit lacinia accumsan. Curabitur ac pharetra ipsum, auctor dictum arcu. Aenean nec ante est.                    </p>
                     <span className="flex flex-row gap-4 whitespace-nowrap">
-                        <Button label="Crear nuevo proyecto" type="button" variant="primary" borderColor="blue" borderSize="small" size="small"/>
-                        <Button label="Cerrar sesión" type="button" variant="secondary" borderColor="blue" borderSize="small" size="small"/>
+                        <Button label="Crear nuevo proyecto" type="button" variant="primary" borderColor="blue" borderSize="small" size="small" paddingX="px-32" paddingY="py-3"/>
+                        <Button label="Cerrar sesión" type="button" variant="secondary" borderColor="blue" borderSize="small" size="small" paddingX="px-4" paddingY="py-3"/>
                     </span>
                 </div>
             </div>
