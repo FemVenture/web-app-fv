@@ -2,10 +2,17 @@
 import { useState, useEffect } from "react";
 import { SearchBar } from "../ui/Searchbar";
 import { Button } from "../ui/Button";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [scrolling, setScrolling] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleRegisterClick = () => {
+    navigate("/register");
+  };
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -70,15 +77,21 @@ const Navbar = () => {
 
           {/* Navigation links */}
           <div className="hidden xl:flex space-x-16 items-center">
-            <a href="#explore" className="underline-offset-4 font-light">
+            <a
+              href="#explore"
+              className="hover:underline underline-offset-4 font-light"
+            >
               Explorar
             </a>
-            <a href="#social" className="underline-offset-4 font-light">
+            <a
+              href="#social"
+              className="hover:underline underline-offset-4 font-light"
+            >
               Comunidad
             </a>
           </div>
 
-          <div className="hidden xl:flex space-x-16 items-center">
+          <div className="hidden xl:flex space-x-16 w-1/3 items-center">
             <SearchBar
               value=""
               placeholder="Buscar un emprendimiento"
@@ -87,10 +100,17 @@ const Navbar = () => {
           </div>
 
           <div className="hidden xl:flex space-x-16 items-center">
-            <a href="/login" className="underline-offset-4 font-light">
+            <a
+              href="/login"
+              className="hover:underline underline-offset-4 font-light whitespace-nowrap"
+            >
               Iniciar sesión
             </a>
-            <Button label="Regístrate" size="medium" />
+            <Button
+              label="Regístrate"
+              size="medium"
+              onClick={handleRegisterClick}
+            />
           </div>
 
           {/* Hamburger menu for mobile devices */}

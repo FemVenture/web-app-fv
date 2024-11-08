@@ -25,9 +25,11 @@ export const Button = ({
 }: ButtonProps): ReactElement => {
   const [buttonStyle, setButtonStyle] = useState("py-2 px-4 text-base w-full");
   const [variantStyle, setVariantStyle] = useState(
-    variant === "primary" ? "bg-blue-950 text-white" : "bg-white text-blue-950"
+    variant === "primary"
+      ? "bg-primary text-white"
+      : "bg-transparent text-primary"
   );
-  const [borderColorStyle, setBorderColorStyle] = useState("border-blue-950");
+  const [borderColorStyle, setBorderColorStyle] = useState("border-primary");
   const [borderSizeStyle, setBorderSizeStyle] = useState("border-2");
   useEffect(() => {
     if (borderColor === "white") {
@@ -35,7 +37,7 @@ export const Button = ({
     } else if (borderColor === "gray") {
       setBorderColorStyle("border-gray-300");
     } else {
-      setBorderColorStyle("border-blue-950");
+      setBorderColorStyle("border-primary");
     }
     if (size === "small") {
       setButtonStyle("py-2 px-2 text-sm w-full md:w-1/4 lg:w-1/6");
