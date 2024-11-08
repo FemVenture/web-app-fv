@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import { Button } from "../../shared/components/ui/Button";
 
 
-export const ProfielPage = (): ReactElement => {
+export const ProfilePage = (): ReactElement => {
     return (
         <div className="m-24">
             <div className="flex flex-row gap-12 justify-center">
@@ -25,14 +25,16 @@ export const ProfielPage = (): ReactElement => {
                 </div>
             </div>
             <div>
-                <h1 className="border-b-4 w-1/4 text-5xl pt-10 py-5 text-primary border-secondary">
-                    Proyectos
-                </h1>
+                <span>
+                    <h2 className="text-primary w-1/4 text-5xl pt-10 mb-2">Proyectos</h2>
+                    <hr className="border-t-2 border-red-300 mb-10 max-w-[365px]" />
+                </span>
             </div>
             <div>
-                <h1 className="border-b-4 w-1/4 text-5xl pt-10 py-5 text-primary whitespace-nowrap border-secondary">
-                    Proyectos Guardados
-                </h1>
+                <span>
+                    <h2 className="text-primary w-1/4 text-5xl whitespace-nowrap pt-10 mb-2">Proyectos Guardados</h2>
+                    <hr className="border-t-2 border-red-300 mb-10 max-w-[365px]" />
+                </span>
             </div>
         </div>
     )

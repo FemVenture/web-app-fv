@@ -2,10 +2,18 @@
 import { useState, useEffect } from "react";
 import { SearchBar } from "../ui/Searchbar";
 import { Button } from "../ui/Button";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [scrolling, setScrolling] = useState(false);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleRegisterClick = () => {
+    navigate("/register");
+  };
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -36,18 +44,19 @@ const Navbar = () => {
     };
   }, []);
 
+  const isHomeRoute = location.pathname === "/";
+
+  const bgColor =
+    isHomeRoute && !scrolling && !showMenu ? "transparent" : "white";
+  const textColor = isHomeRoute && !scrolling && !showMenu ? "white" : "black";
+
   return (
-    <div
-      className="navbar-wrapper fixed top-0 w-full z-50 "
-      style={{
-        backgroundColor: showMenu || scrolling ? "white" : "transparent",
-      }}
-    >
+    <div className="navbar-wrapper fixed top-0 w-full z-50">
       <nav
         className="px-6 md:px-10 py-6 backdrop-blur-sm"
         style={{
-          backgroundColor: showMenu || scrolling ? "white" : "transparent",
-          color: showMenu || scrolling ? "black" : "white",
+          backgroundColor: bgColor,
+          color: textColor,
         }}
       >
         <div className="mx-auto flex justify-between items-center">
@@ -56,29 +65,26 @@ const Navbar = () => {
             className="flex items-center text-2xl gap-x-4 hover:no-underline"
             href="/"
           >
-            {/*
-            <img
-              width={40}
-              height={49.27}
-              src="/icons/FemVentureLogo.svg"
-              alt="FemVenture Logo"
-              loading="lazy"
-            />
-            */}
             FemVenture
           </a>
 
           {/* Navigation links */}
           <div className="hidden xl:flex space-x-16 items-center">
-            <a href="#explore" className="underline-offset-4 font-light">
+            <a
+              href="/explore"
+              className="hover:underline underline-offset-4 font-light"
+            >
               Explorar
             </a>
-            <a href="#social" className="underline-offset-4 font-light">
+            <a
+              href="/social"
+              className="hover:underline underline-offset-4 font-light"
+            >
               Comunidad
             </a>
           </div>
 
-          <div className="hidden xl:flex space-x-16 items-center">
+          <div className="hidden xl:flex space-x-16 w-1/3 items-center">
             <SearchBar
               value=""
               placeholder="Buscar un emprendimiento"
@@ -87,10 +93,18 @@ const Navbar = () => {
           </div>
 
           <div className="hidden xl:flex space-x-16 items-center">
-            <a href="/login" className="underline-offset-4 font-light">
+            <a
+              href="/login"
+              className="hover:underline underline-offset-4 font-light whitespace-nowrap"
+            >
               Iniciar sesión
             </a>
-            <Button label="Regístrate" size="medium" />
+            <Button
+              label="Regístrate"
+              size="medium"
+              paddingX="px-8"
+              onClick={handleRegisterClick}
+            />
           </div>
 
           {/* Hamburger menu for mobile devices */}
@@ -126,18 +140,18 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       <div
-        className={`absolute px-8 pt-2 pb-8 w-full xl:hidden  overflow-hidden shadow-lg bg-white ${
+        className={`absolute px-8 pt-2 pb-8 w-full xl:hidden overflow-hidden shadow-lg bg-white ${
           showMenu ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <ul className="text-right ml-auto">
           <li className="pb-4">
-            <a href="#explore" className="font-light">
+            <a href="/explore" className="font-light">
               Explorar
             </a>
           </li>
           <li className="py-4">
-            <a href="#social" className="font-light">
+            <a href="/social" className="font-light">
               Comunidad
             </a>
           </li>

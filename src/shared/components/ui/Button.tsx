@@ -52,7 +52,6 @@ export const Button = ({
             setBorderSizeStyle("border-4")  
         }
     }, [])
-
     return (
         <button type={type} onClick={(e) => onClick ? onClick(e) : undefined} disabled={disabled} className={`flex ${paddingY} ${paddingX} justify-center font-semibold rounded-xl ${borderSizeStyle} ${buttonStyle} ${variantStyle} ${borderColorStyle}`}>
             {label ?? children ?? ""}
