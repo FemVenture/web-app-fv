@@ -32,11 +32,14 @@ export const ProjectCard = ({
     >
       {cardType === "variant" ? (
         <>
-          <img
-            className="object-cover h-[500px] w-[300px]"
-            src={image}
-            alt={title}
-          />
+          <div className="h-[500px] w-[300px] ">
+            <img
+              className="object-cover h-full w-full rounded-lg"
+              src={image}
+              alt={title}
+            />
+          </div>
+
           <div className="py-4">
             <h2 className="text-2xl font-bold mb-4">{title}</h2>
             <p className="text-sm mb-4 overflow-hidden max-h-[60px] line-clamp-2">
@@ -68,9 +71,9 @@ export const ProjectCard = ({
         </>
       ) : (
         <>
-          <div className="relative">
+          <div className="relative h-[500px] w-[300px]">
             <img
-              className="object-cover h-[500px] w-full"
+              className="object-cover w-full h-full"
               src={image}
               alt={title}
             />

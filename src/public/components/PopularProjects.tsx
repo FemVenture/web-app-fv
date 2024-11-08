@@ -45,9 +45,9 @@ export const PopularProjects = (): ReactElement => {
     <div className="p-4 md:px-16 py-8">
       <span>
         <h2 className="text-primary mb-2">Proyectos populares</h2>
-        <hr className="border-t-2 border-red-300 mb-8 max-w-[365px]" />
+        <hr className="border-t-2 border-red-300 mb-10 max-w-[365px]" />
       </span>
-      <div className="flex gap-20">
+      <div className="flex flex-col md:flex-row gap-20">
         <ProjectCard
           title="Título del proyecto 1"
           description="Lorem ipsum dolor sit amet"
@@ -57,7 +57,7 @@ export const PopularProjects = (): ReactElement => {
           total_funding_goal={100}
           cardType="variant"
         />
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
           {" "}
           {projects.map((project, index) => (
             <ProjectCard
