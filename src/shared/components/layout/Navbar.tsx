@@ -45,6 +45,8 @@ const Navbar = () => {
   }, []);
 
   const isHomeRoute = location.pathname === "/";
+  const isAuthRoute =
+    location.pathname === "/register" || location.pathname === "/login";
 
   const bgColor =
     isHomeRoute && !scrolling && !showMenu ? "transparent" : "white";
@@ -68,44 +70,49 @@ const Navbar = () => {
             FemVenture
           </a>
 
-          {/* Navigation links */}
-          <div className="hidden xl:flex space-x-16 items-center">
-            <a
-              href="/explore"
-              className="hover:underline underline-offset-4 font-light"
-            >
-              Explorar
-            </a>
-            <a
-              href="/social"
-              className="hover:underline underline-offset-4 font-light"
-            >
-              Comunidad
-            </a>
-          </div>
+          {/* Condicional para mostrar los elementos solo si no estamos en las rutas de autenticación */}
+          {!isAuthRoute && (
+            <>
+              {/* Navigation links */}
+              <div className="hidden xl:flex space-x-16 items-center">
+                <a
+                  href="/explore"
+                  className="hover:underline underline-offset-4 font-light"
+                >
+                  Explorar
+                </a>
+                <a
+                  href="/social"
+                  className="hover:underline underline-offset-4 font-light"
+                >
+                  Comunidad
+                </a>
+              </div>
 
-          <div className="hidden xl:flex space-x-16 w-1/3 items-center">
-            <SearchBar
-              value=""
-              placeholder="Buscar un emprendimiento"
-              onChange={() => {}}
-            />
-          </div>
+              <div className="hidden xl:flex space-x-16 w-1/3 items-center">
+                <SearchBar
+                  value=""
+                  placeholder="Buscar un emprendimiento"
+                  onChange={() => {}}
+                />
+              </div>
 
-          <div className="hidden xl:flex space-x-16 items-center">
-            <a
-              href="/login"
-              className="hover:underline underline-offset-4 font-light whitespace-nowrap"
-            >
-              Iniciar sesión
-            </a>
-            <Button
-              label="Regístrate"
-              size="medium"
-              paddingX="px-8"
-              onClick={handleRegisterClick}
-            />
-          </div>
+              <div className="hidden xl:flex space-x-16 items-center">
+                <a
+                  href="/login"
+                  className="hover:underline underline-offset-4 font-light whitespace-nowrap"
+                >
+                  Iniciar sesión
+                </a>
+                <Button
+                  label="Regístrate"
+                  size="medium"
+                  paddingX="px-8"
+                  onClick={handleRegisterClick}
+                />
+              </div>
+            </>
+          )}
 
           {/* Hamburger menu for mobile devices */}
           <button className="xl:hidden" onClick={toggleMenu}>
