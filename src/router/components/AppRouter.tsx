@@ -6,6 +6,7 @@ import { Home } from "../../public/pages/Home";
 import { Login } from "../../auth/pages/LoginPage";
 import { Register } from "../../auth/pages/RegisterPage";
 import { ProfielPage } from "../../profile/page/ProfilePage";
+import { ProjectPage } from "../../project/pages/ProjectPage";
 
 
 
@@ -20,6 +21,7 @@ export const AppRouter = (): ReactElement => {
             }
             >
                 <Route path="/" element={<Home />} />
+                <Route path="/projects" element={<ProjectPage/>}/>
                 <Route path="/profile" element={<ProfielPage/>}/>
             </Route>
             <Route element={

@@ -4,7 +4,7 @@ import { Button } from "../../shared/components/ui/Button";
 
 export const ProfielPage = (): ReactElement => {
     return (
-        <div className="mt-24 mx-24">
+        <div className="m-24">
             <div className="flex flex-row gap-12 justify-center">
                 <img className="w-auto h-72 rounded-lg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-FAu23SIJy_WaXgFKqtqupGbqHpM2Lz63kA&s" alt="image" />
                 <div className="flex flex-col gap-5 text-left">

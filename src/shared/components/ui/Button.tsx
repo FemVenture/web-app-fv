@@ -35,7 +35,7 @@ export const Button = ({
         if (borderColor === "white"){
             setBorderColorStyle("border-background")
         } else if (borderColor === "gray") {
-            setBorderColorStyle("border-textSecondary")
+            setBorderColorStyle("border-light")
         } else {
             setBorderColorStyle("border-primary")
         }
