@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { SearchBar } from "../ui/Searchbar";
+import { Button } from "../ui/Button";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -52,7 +53,7 @@ const Navbar = () => {
         <div className="mx-auto flex justify-between items-center">
           {/* Logo */}
           <a
-            className="flex items-center md:text-4xl text-2xl gap-x-4 hover:no-underline"
+            className="flex items-center text-2xl gap-x-4 hover:no-underline"
             href="/"
           >
             {/*
@@ -89,9 +90,7 @@ const Navbar = () => {
             <a href="/login" className="underline-offset-4 font-light">
               Iniciar sesión
             </a>
-            <a href="/register" className="underline-offset-4 font-light">
-              Regístrate
-            </a>
+            <Button label="Regístrate" size="medium" />
           </div>
 
           {/* Hamburger menu for mobile devices */}
