@@ -2,10 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    font-family: "Poppins", sans-serif;
+}
+
 h1 {
     font-size: 64px;
+    font-family: 'Inria Sans', sans-serif;
 }
 
 h2 {
     font-size: 24px;
+    font-family: 'Inria Sans', sans-serif;
 }
