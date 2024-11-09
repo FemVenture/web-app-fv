@@ -1,13 +1,12 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useState } from "react";
 import { TextInput } from "../../shared/components/ui/TextInput";
 import { Button } from "../../shared/components/ui/Button";
-import { register } from "../services/auth.service";
 
 export const RegisterForm = (): ReactElement => {
-  const [fullName, setFullName] = useState("")
-  const [location, setLocation] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [fullName] = useState("")
+  const [location] = useState("")
+  const [email] = useState("")
+  const [password] = useState("")
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("Formulario enviado:");

@@ -28,7 +28,6 @@ export const PopularProjects = (): ReactElement => {
           projectId={2}
           title="Título del proyecto 1"
           description="Lorem ipsum dolor sit amet"
-          image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsFP4yNddWioA0VxTXuLzsqNu5iMCBd0xhZg&s"
           link=""
           funds_raised={27}
           total_funding_goal={100}
