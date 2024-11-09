@@ -1,9 +1,10 @@
 import { ReactElement, useEffect, useState } from "react";
 import { Button } from "../../shared/components/ui/Button";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { EntrepreneurComponent } from "./EntrepreneurComponent";
 import Markdown from "react-markdown";
 import { Profile } from "../../profile/models/Profile";
+import { Project } from "../models/Projects";
 import { Projects } from "../models/Projects";
 import { ProjectCard } from "./PojectCard";
 import { getEntrepreneurById } from "../../profile/services/profile.service";
@@ -12,7 +13,7 @@ import { getProjectByEntrepreneurId } from "../services/project.service";
 import { getImageByProjectId } from "../services/project.service";
 import { Image } from "../../public/models/Image";
 
-export const Project = (): ReactElement => {
+export const ProjectComponent = (): ReactElement => {
     const [porcentaje, setPorcentaje] = useState(0)
     const [primaryImage, setPrimaryImage] = useState("")
     const [secondaryImages, setSecondaryImages] = useState([""])
@@ -21,8 +22,20 @@ export const Project = (): ReactElement => {
         entrepreneurId: string
     }>() 
     const [activeSection, setActiveSection] = useState("Detalles")
-    const [mainProject, setMainProject] = useState<Projects>({})
-    const [projects, setProjects] = useState<Projects[]>([])
+    const [mainProject, setMainProject] = useState<Project>({
+        id: 0,
+        title: "",
+        description: "",
+        start_date: "",
+        end_date: "",
+        total_funding_goal: 0,
+        funds_raised: 0,
+        status: "",
+        tag: "",
+        text: "",
+        entrepreneurId: 0,
+      })
+    const [projects, setProjects] = useState<Projects>([])
     const [entrepreneur, setEntrepreneur] = useState<Profile>({
         image_url: '',
         fullName: '',
@@ -32,22 +45,22 @@ export const Project = (): ReactElement => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await getEntrepreneurById(entrepreneurId);
+            const result = await getEntrepreneurById(entrepreneurId ?? "");
             if (result.status === "success") {
                 const data = result.data as Profile;
                 setEntrepreneur(data);
             }
-            const resultProjects = await getProjectById(projectId);
+            const resultProjects = await getProjectById(projectId ?? "");
             if (resultProjects.status === "success") {
-                const data = resultProjects.data as Projects;
+                const data = resultProjects.data as Project;
                 setMainProject(data);
             }
-            const resultProjectsByEntrepreneur = await getProjectByEntrepreneurId(entrepreneurId);
+            const resultProjectsByEntrepreneur = await getProjectByEntrepreneurId(entrepreneurId ?? "");
             if (resultProjectsByEntrepreneur.status === "success") {
-                const data = resultProjectsByEntrepreneur.data as Projects[];
+                const data = resultProjectsByEntrepreneur.data as unknown as Projects;
                 setProjects(data);
             }
-            const resultImage = await getImageByProjectId(projectId);
+            const resultImage = await getImageByProjectId(projectId ?? "");
             if (resultImage.status === "success") {
                 const data = resultImage.data as unknown as Image[];
                 setPrimaryImage(data[0].imageUrl);

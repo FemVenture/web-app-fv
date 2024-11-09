@@ -32,8 +32,7 @@ export const ApproveProject = (): ReactElement => {
             projectId={project.id}
             title={project.title}
             description={project.description}
-            entrepreneurId={project.entrepreneurId}
-            link={project.link}
+            entrepreneurId={project.entrepreneurId.toString()}
             funds_raised={project.funds_raised || 40}
             total_funding_goal={project.total_funding_goal || 1000}
             cardType="pending"

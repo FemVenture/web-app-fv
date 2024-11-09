@@ -8,7 +8,6 @@ type CardButtonProps = {
   projectId: number;
   entrepreneurId: string;
   title: string;
-  link: string;
   description: string;
   funds_raised: number;
   total_funding_goal: number;
@@ -19,7 +18,6 @@ export const ProjectCard = ({
   projectId,
   entrepreneurId,
   title,
-  link,
   description,
   funds_raised,
   total_funding_goal,
@@ -89,7 +87,7 @@ export const ProjectCard = ({
               label="Patrocinar proyecto"
               size="medium"
               variant="secondary"
-              onClick={() => navigate(link)}
+              onClick={() => navigate(`/project/${projectId}/${entrepreneurId}`)}
             />
           </div>
         </>
@@ -112,7 +110,7 @@ export const ProjectCard = ({
               label="Revisar proyecto"
               size="medium"
               variant="secondary"
-              onClick={() => navigate(link)}
+              onClick={() => navigate(`/projects/${projectId}/${entrepreneurId}`)}
             />
           </div>
         </>

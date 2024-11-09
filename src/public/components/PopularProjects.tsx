@@ -28,10 +28,10 @@ export const PopularProjects = (): ReactElement => {
           projectId={2}
           title="Título del proyecto 1"
           description="Lorem ipsum dolor sit amet"
-          link=""
           funds_raised={27}
           total_funding_goal={100}
           cardType="variant"
+          entrepreneurId="2"
         />
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
           {" "}
@@ -41,8 +41,7 @@ export const PopularProjects = (): ReactElement => {
               projectId={project.id}
               title={project.title}
               description={project.description}
-              entrepreneurId={project.entrepreneurId}
-              link={project.link}
+              entrepreneurId={project.entrepreneurId.toString()}
               funds_raised={project.funds_raised || 40}
               total_funding_goal={project.total_funding_goal || 1000}
             />

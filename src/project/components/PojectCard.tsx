@@ -1,12 +1,12 @@
 import { ReactElement, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Projects } from "../models/Projects";
+import { Project } from "../models/Projects";
 import { Button } from "../../shared/components/ui/Button";
 import { getImageByProjectId } from "../services/project.service";
 import { Image } from "../../public/models/Image";
 
 type ProjectProps = {
-    Project: Projects;
+    Project: Project;
 };
 
 export const ProjectCard = ({ Project }: ProjectProps): ReactElement => {

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Projects } from '../models/Projects';
+import { Project } from '../models/Projects';
 
 const instance = axios.create({
     baseURL:import.meta.env.VITE_API_ENDPOINT
@@ -24,9 +25,9 @@ export const getAllProjects = async ():  Promise<{status: string, data: Projects
     }
 }
 
-export const getProjectById = async (id: string): Promise<{status: string, data: Projects | string; message?: string}> => {
+export const getProjectById = async (id: string): Promise<{status: string, data: Project | string; message?: string}> => {
     try {
-        const response = await instance.get<Projects>(`/projects/${id}`);
+        const response = await instance.get<Project>(`/projects/${id}`);
         return {status: 'success', data: response.data };
     } catch (error: unknown) {
         if (axios.isAxiosError(error) && error.response) {
@@ -62,7 +63,7 @@ export const getImageByProjectId = async (projectId: string): Promise<{status: s
     }
 }
 
-export const getProjectByEntrepreneurId = async (id: number): Promise<{status: string; data: string[] | string; message?: string}> => {
+export const getProjectByEntrepreneurId = async (id: string): Promise<{status: string; data: string[] | string; message?: string}> => {
     try {
         const response = await instance.get<string[]>(`/projects/entrepreneur/${id}`);
         return {status: 'success', data: response.data };

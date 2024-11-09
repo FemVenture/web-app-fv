@@ -28,7 +28,7 @@ export const Button = ({
     paddingY = "py-2",
 }: ButtonProps): ReactElement => {
     const [buttonStyle, setButtonStyle] = useState("text-base w-full")
-    const [variantStyle, setVariantStyle] = useState(variant === "primary" ? "bg-primary text-background" : "bg-background text-primary")
+    const [variantStyle] = useState(variant === "primary" ? "bg-primary text-background" : "bg-background text-primary")
     const [borderColorStyle, setBorderColorStyle] = useState("border-blue-950")
     const [borderSizeStyle, setBorderSizeStyle] = useState("border-2")
     useEffect(() => {

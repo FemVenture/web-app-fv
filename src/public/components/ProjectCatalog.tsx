@@ -12,7 +12,7 @@ export const ProjectCatalog = (): ReactElement => {
 
   const filteredProjects = projects.filter((project) => {
     const matchesCategory =
-      selectedCategory === "Todos" || project.category === selectedCategory;
+      selectedCategory === "Todos" || project.tag === selectedCategory;
     const matchesSearch = project.title
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
@@ -75,8 +75,7 @@ export const ProjectCatalog = (): ReactElement => {
             projectId={project.id}
             title={project.title}
             description={project.description}
-            entrepreneurId={project.entrepreneurId}
-            link={project.link}
+            entrepreneurId={project.entrepreneurId.toString()}
             funds_raised={project.funds_raised || 40}
             total_funding_goal={project.total_funding_goal || 1000}
           />

@@ -1,4 +1,4 @@
-export type Projects = {
+export type Project = {
     id: number,
     title: string,
     description: string,
@@ -11,3 +11,5 @@ export type Projects = {
     text: string,
     entrepreneurId: number,
 }
+
+export type Projects = Project[];
