@@ -1,11 +1,16 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { TextInput } from "../../shared/components/ui/TextInput";
 import { Button } from "../../shared/components/ui/Button";
+import { register } from "../services/auth.service";
 
 export const RegisterForm = (): ReactElement => {
+  const [fullName, setFullName] = useState("")
+  const [location, setLocation] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("Formulario enviado");
+    console.log("Formulario enviado:");
   };
 
   return (
@@ -20,25 +25,25 @@ export const RegisterForm = (): ReactElement => {
         >
           <TextInput
             title="Nombre completo"
-            value=""
+            value={fullName}
             onChange={() => {}}
             type="text"
           />
           <TextInput
             title="Ubicación"
-            value=""
+            value={location}
             onChange={() => {}}
             type="text"
           />
           <TextInput
             title="Correo electrónico"
-            value=""
+            value={email}
             onChange={() => {}}
             type="email"
           />
           <TextInput
             title="Contraseña"
-            value=""
+            value={password}
             onChange={() => {}}
             type="password"
           />

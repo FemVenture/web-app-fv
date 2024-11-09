@@ -14,7 +14,7 @@ export const ProfileComponent = (): ReactElement => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await getEntrepreneurById(2);
+            const result = await getEntrepreneurById("2");
             if (result.status === "success") {
                 const data = result.data as Profile;
                 setProfile(data);
