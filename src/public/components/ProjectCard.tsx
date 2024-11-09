@@ -5,14 +5,14 @@ import { getImageByProjectId } from "../../project/services/project.service";
 import { Image } from "../models/Image";
 
 type CardButtonProps = {
-  projectId: number,
+  projectId: number;
   entrepreneurId: string;
   title: string;
   link: string;
   description: string;
   funds_raised: number;
   total_funding_goal: number;
-  cardType?: "default" | "variant";
+  cardType?: "default" | "variant" | "pending";
 };
 
 export const ProjectCard = ({
@@ -26,7 +26,7 @@ export const ProjectCard = ({
   cardType = "default",
 }: CardButtonProps): ReactElement => {
   const navigate = useNavigate();
-  const [images, setImages] = useState<Image[]>([])
+  const [images, setImages] = useState<Image[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,20 +37,26 @@ export const ProjectCard = ({
       }
     };
     fetchData();
-  }, [])
+  }, []);
+
+  const handleCardClick = () => {
+    if (cardType === "pending") {
+      navigate(`/projects/pending/${projectId}/${entrepreneurId}`);
+    } else {
+      navigate(`/projects/${projectId}/${entrepreneurId}`);
+    }
+  };
 
   return (
     <div
       className={`rounded-lg overflow-hidden bg-white ${
         cardType === "variant" ? "w-[300px]" : "w-[300px] cursor-pointer"
       }`}
-      onClick={cardType === "default" ? () => navigate(`/projects/${projectId}/${entrepreneurId}`) : undefined}
+      onClick={handleCardClick}
     >
       {cardType === "variant" ? (
         <>
           <div className="h-[500px] w-full">
-            {" "}
-            {/* Usar w-full para ocupar todo el ancho */}
             <img
               className="object-cover h-full w-full rounded-lg"
               src={images[0]?.imageUrl}
@@ -87,11 +93,32 @@ export const ProjectCard = ({
             />
           </div>
         </>
+      ) : cardType === "pending" ? (
+        <>
+          <div className="h-[500px] w-full">
+            <img
+              className="object-cover h-full w-full rounded-lg"
+              src={images[0]?.imageUrl}
+              alt={title}
+            />
+          </div>
+
+          <div className="py-4">
+            <h2 className="text-2xl font-bold mb-4">{title}</h2>
+            <p className="text-sm mb-4 overflow-hidden max-h-[60px] line-clamp-2">
+              {description}
+            </p>
+            <Button
+              label="Revisar proyecto"
+              size="medium"
+              variant="secondary"
+              onClick={() => navigate(link)}
+            />
+          </div>
+        </>
       ) : (
         <>
           <div className="relative h-[500px] w-full">
-            {" "}
-            {/* Usar w-full para ocupar todo el ancho */}
             <img
               className="object-cover w-full h-full"
               src={images[0]?.imageUrl}
