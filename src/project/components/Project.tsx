@@ -120,7 +120,7 @@ export const Project = (): ReactElement => {
                             projects
                             .filter(project => project.id.toString() !== projectId)
                             .map(project => (
-                              <ProjectCard key={project.id} Project={project} />
+                                <ProjectCard key={project.id} Project={project} />
                             ))
                         }
                     </div>
