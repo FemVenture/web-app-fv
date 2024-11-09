@@ -8,5 +8,6 @@ export type Projects = {
     funds_raised: number,
     status: string,
     tag: string,
-    creator_id: number,
+    text: string,
+    entrepreneurId: number,
 }

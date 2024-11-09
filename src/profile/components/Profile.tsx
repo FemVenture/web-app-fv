@@ -1,23 +1,45 @@
-import { ReactElement } from "react";
+import { ReactElement, useState, useEffect } from "react";
 import { Button } from "../../shared/components/ui/Button";
+import { getEntrepreneurById } from "../services/profile.service";
+import { Profile } from "../models/Profile";
 
 
-export const Profile = (): ReactElement => {
+export const ProfileComponent = (): ReactElement => {
+    const [profile, setProfile] = useState<Profile>({
+        image_url: '',
+        fullName: '',
+        location: '',
+        description: ''
+    });
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await getEntrepreneurById(2);
+            if (result.status === "success") {
+                const data = result.data as Profile;
+                setProfile(data);
+            }
+            };
+            fetchData();
+    }, [])
+
+
     return (
         <div className="m-24">
             <div className="flex flex-row gap-12 justify-center">
-                <img className="w-auto h-72 rounded-lg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-FAu23SIJy_WaXgFKqtqupGbqHpM2Lz63kA&s" alt="image" />
+                <img className="w-auto h-72 rounded-lg" src={profile.image_url} alt="image" />
                 <div className="flex flex-col gap-5 text-left">
                     <div className="flex flex-col">
                         <h1 className="text-5xl text-primary">
-                            Nombre
+                            {profile.fullName}
                         </h1>
                         <p className="text-base text-textPrimary">
-                            Lima, Peru
+                            {profile.location}
                         </p>
                     </div>
                     <p className="text-lg text-textSecondary">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent posuere lectus sit amet risus aliquam blandit. Sed lacinia turpis ullamcorper orci lobortis commodo. Aliquam ac aliquam erat. Vivamus eros justo, tempor vel iaculis quis, ultricies ac enim. Maecenas suscipit lacinia accumsan. Curabitur ac pharetra ipsum, auctor dictum arcu. Aenean nec ante est.                    </p>
+                        {profile.description}
+                    </p>
                     <span className="flex flex-row gap-4 whitespace-nowrap">
                         <Button label="Crear nuevo proyecto" type="button" variant="primary" borderColor="blue" borderSize="small" size="small" paddingX="px-32" paddingY="py-3"/>
                         <Button label="Cerrar sesión" type="button" variant="secondary" borderColor="blue" borderSize="small" size="small" paddingX="px-4" paddingY="py-3"/>

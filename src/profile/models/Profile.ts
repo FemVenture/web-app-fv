@@ -1,5 +1,5 @@
-export type Entrepreneur = {
-    name: string,
+export type Profile = {
+    fullName: string,
     location: string,
     description: string,
     image_url: string,

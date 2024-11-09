@@ -1,63 +1,60 @@
 import { ReactElement, useEffect, useState } from "react";
 import { Button } from "../../shared/components/ui/Button";
+import { useParams, useNavigate } from "react-router-dom";
 import { EntrepreneurComponent } from "./EntrepreneurComponent";
 import Markdown from "react-markdown";
-import { Entrepreneur } from "../models/Entrepreneur";
+import { Profile } from "../../profile/models/Profile";
 import { Projects } from "../models/Projects";
 import { ProjectCard } from "./PojectCard";
+import { getEntrepreneurById } from "../../profile/services/profile.service";
+import { getProjectById } from "../services/project.service";
+import { getProjectByEntrepreneurId } from "../services/project.service";
+import { getImageByProjectId } from "../services/project.service";
+import { Image } from "../../public/models/Image";
 
 export const Project = (): ReactElement => {
-    const [montoRecolectado, setMontoRecolectado] = useState(5000)
-    const [montoTotal, setMontoTotal] = useState(12000)
     const [porcentaje, setPorcentaje] = useState(0)
-    const [primaryImage, setPrimaryImage] = useState("https://i.pinimg.com/736x/83/8c/69/838c69b8e6d664cd3db8fd22294edb9e.jpg")
+    const [primaryImage, setPrimaryImage] = useState("")
     const [secondaryImages, setSecondaryImages] = useState([""])
+    const { projectId, entrepreneurId } = useParams<{
+        projectId: string,
+        entrepreneurId: string
+    }>() 
     const [activeSection, setActiveSection] = useState("Detalles")
-    const [projects, setProjects] = useState<Projects[]>([
-        {
-            id: 0,
-            title: "Test",
-            description: "Lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum",
-            start_date: "",
-            end_date: "",
-            total_funding_goal: 70000,
-            funds_raised: 40000,
-            status: "",
-            tag: "",
-            creator_id: 0,
-        },
-        {
-            id: 1,
-            title: "Test2",
-            description: "Lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum",
-            start_date: "",
-            end_date: "",
-            total_funding_goal: 20000,
-            funds_raised: 18000,
-            status: "",
-            tag: "",
-            creator_id: 0,
-        }
-    ])
-    const [entrepreneur, setEntrepreneur] = useState<Entrepreneur>({
-        name: "Leia Organa",
-        location: "Lima, Perú",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent posuere lectus sit amet risus aliquam blandit. Sed lacinia turpis ullamcorper orci lobortis commodo. Aliquam ac aliquam erat. Vivamus eros justo, tempor vel iaculis quis, ultricies ac enim. Maecenas suscipit lacinia accumsan. Curabitur ac pharetra ipsum, auctor dictum arcu. Aenean nec ante est.",
-        image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw_-k7ssUgts2wR06OIAzhdM2pk6ndCvDDFQ&s",
+    const [mainProject, setMainProject] = useState<Projects>({})
+    const [projects, setProjects] = useState<Projects[]>([])
+    const [entrepreneur, setEntrepreneur] = useState<Profile>({
+        image_url: '',
+        fullName: '',
+        location: '',
+        description: ''
     });
-    const [markdownText, setMarkDownText] = useState(`
-# Test de markdown
-## Este es un subtitulo
-### Esto no se que es
-
-Hola, esto es de prueba
-
-![Texto alternativo](https://t2.ea.ltmcdn.com/es/posts/1/3/7/por_que_los_chihuahuas_son_agresivos_26731_orig.jpg)
-        `)
 
     useEffect(() => {
-        setSecondaryImages(["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQc-iqiNfGMQhPTWNfesxAnICFV5-fAHERsQ&s", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBZCGlBA78aAsCu0m1noK0TTAf_blQROiAZA&s", "https://pbs.twimg.com/media/GOrzmLIW8AAmNq_.jpg:large" ])
-        setPorcentaje(montoRecolectado*100/montoTotal)
+        const fetchData = async () => {
+            const result = await getEntrepreneurById(entrepreneurId);
+            if (result.status === "success") {
+                const data = result.data as Profile;
+                setEntrepreneur(data);
+            }
+            const resultProjects = await getProjectById(projectId);
+            if (resultProjects.status === "success") {
+                const data = resultProjects.data as Projects;
+                setMainProject(data);
+            }
+            const resultProjectsByEntrepreneur = await getProjectByEntrepreneurId(entrepreneurId);
+            if (resultProjectsByEntrepreneur.status === "success") {
+                const data = resultProjectsByEntrepreneur.data as Projects[];
+                setProjects(data);
+            }
+            const resultImage = await getImageByProjectId(projectId);
+            if (resultImage.status === "success") {
+                const data = resultImage.data as unknown as Image[];
+                setPrimaryImage(data[0].imageUrl);
+                setSecondaryImages(data.slice(1).map((image: Image) => image.imageUrl));            }
+        };
+        fetchData();
+        setPorcentaje(mainProject.funds_raised*100/mainProject.total_funding_goal)
     }, [])
 
     const handleChangeImage = (indexToRemove: number, newImage: string) => {
@@ -91,17 +88,17 @@ Hola, esto es de prueba
             </div>
             <div className="w-[65%]">
                 <div className={`${activeSection === "Detalles" ? "block" : "hidden"}`}>
-                    <Markdown>{markdownText}</Markdown>
+                    <Markdown>{mainProject.text}</Markdown>
                 </div>
                 <div className={`${activeSection === "Hitos" ? "block" : "hidden"}`}>
                     <h1>Hitos section</h1>
                 </div>
                 <div className={`${activeSection === "Sobre" ? "block" : "hidden"} flex flex-col gap-5`}>
                     <div className="flex flex-row gap-5">
-                        <img src={entrepreneur.image_url} alt={entrepreneur.name} className="rounded-2xl h-80 w-64 object-cover"/>
+                        <img src={entrepreneur.image_url} alt={entrepreneur.fullName} className="rounded-2xl h-80 w-64 object-cover"/>
                         <div className="flex flex-col gap-5">
                             <h1 className="text-5xl text-primary">
-                                {entrepreneur.name}
+                                {entrepreneur.fullName}
                             </h1>
                             <p className="text-base">
                                 {entrepreneur.location}
@@ -120,22 +117,22 @@ Hola, esto es de prueba
                             <hr className="border-t-2 border-red-300 mb-10 max-w-[365px]" />
                         </span>
                         {
-                            projects.map(project => {
-                                return (
-                                    <ProjectCard key={project.id} Project={project}/>
-                                )
-                            })
+                            projects
+                            .filter(project => project.id.toString() !== projectId)
+                            .map(project => (
+                              <ProjectCard key={project.id} Project={project} />
+                            ))
                         }
                     </div>
                 </div>
             </div>
             <div className="fixed z-30 right-0 flex flex-col w-[27%] mr-24 gap-5">
-                <h1 className="text-primary text-5xl">Título del Proyecto</h1>
+                <h1 className="text-primary text-5xl">{mainProject.title}</h1>
                 <p className="text-primary text-base">30 dias para finalizar el hito 1</p>
                 <p className="text-textSecondary text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent posuere lectus sit amet risus aliquam blandit. 
+                    {mainProject.description} 
                 </p>
-                <EntrepreneurComponent full_name={entrepreneur.name} location={entrepreneur.location} image_url={entrepreneur.image_url}/>
+                <EntrepreneurComponent full_name={entrepreneur.fullName} location={entrepreneur.location} image_url={entrepreneur.image_url}/>
                 <div className="relative w-full bg-light">
                         <div className="bg-secondary h-2" style={{
                                 width: `${porcentaje}%`,
@@ -148,7 +145,7 @@ Hola, esto es de prueba
                             Recolectado:
                         </p>
                         <p>
-                            S/. {montoRecolectado}
+                            S/. {mainProject.funds_raised}
                         </p>
                     </span>
                     <span className="flex flex-row gap-2 text-xs">
@@ -156,7 +153,7 @@ Hola, esto es de prueba
                             Meta:
                         </p>
                         <p>
-                           S/. {montoTotal}
+                           S/. {mainProject.total_funding_goal}
                         </p>
                     </span>
                 </div>

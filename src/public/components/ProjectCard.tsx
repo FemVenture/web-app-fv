@@ -1,9 +1,12 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../shared/components/ui/Button";
+import { getImageByProjectId } from "../../project/services/project.service";
+import { Image } from "../models/Image";
 
 type CardButtonProps = {
-  image: string;
+  projectId: number,
+  entrepreneurId: string;
   title: string;
   link: string;
   description: string;
@@ -13,7 +16,8 @@ type CardButtonProps = {
 };
 
 export const ProjectCard = ({
-  image,
+  projectId,
+  entrepreneurId,
   title,
   link,
   description,
@@ -22,13 +26,25 @@ export const ProjectCard = ({
   cardType = "default",
 }: CardButtonProps): ReactElement => {
   const navigate = useNavigate();
+  const [images, setImages] = useState<Image[]>([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getImageByProjectId(projectId.toString());
+      if (result.status === "success") {
+        const data = result.data as unknown as Image[];
+        setImages(data);
+      }
+    };
+    fetchData();
+  }, [])
 
   return (
     <div
       className={`rounded-lg overflow-hidden bg-white ${
         cardType === "variant" ? "w-[300px]" : "w-[300px] cursor-pointer"
       }`}
-      onClick={cardType === "default" ? () => navigate(link) : undefined}
+      onClick={cardType === "default" ? () => navigate(`/projects/${projectId}/${entrepreneurId}`) : undefined}
     >
       {cardType === "variant" ? (
         <>
@@ -37,7 +53,7 @@ export const ProjectCard = ({
             {/* Usar w-full para ocupar todo el ancho */}
             <img
               className="object-cover h-full w-full rounded-lg"
-              src={image}
+              src={images[0]?.imageUrl}
               alt={title}
             />
           </div>
@@ -78,7 +94,7 @@ export const ProjectCard = ({
             {/* Usar w-full para ocupar todo el ancho */}
             <img
               className="object-cover w-full h-full"
-              src={image}
+              src={images[0]?.imageUrl}
               alt={title}
             />
             <div className="absolute bottom-0 left-0 right-0 bg-gray-600 bg-opacity-50 backdrop-blur-sm p-4 m-2 rounded-xl">

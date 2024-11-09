@@ -21,7 +21,7 @@ export const AppRouter = (): ReactElement => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/projects" element={<ProjectPage/>}/>
+        <Route path="/projects/:projectId/:entrepreneurId" element={<ProjectPage/>}/>
         <Route path="/explore" element={<Explore />} />
       </Route>
       <Route
