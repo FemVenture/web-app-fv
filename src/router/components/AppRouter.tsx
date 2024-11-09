@@ -8,6 +8,8 @@ import { Register } from "../../auth/pages/RegisterPage";
 import { ProfilePage } from "../../profile/page/ProfilePage";
 import { ProjectPage } from "../../project/pages/ProjectPage";
 import { Explore } from "../../public/pages/Explore";
+import { EventsPage } from "../../social/pages/EventsPage";
+import { ApproveProjectPage } from "../../project/pages/ApproveProjectPage";
 
 export const AppRouter = (): ReactElement => {
   //const isLogged = useAuthentication((state) => state.isLoggedIn())
@@ -21,8 +23,13 @@ export const AppRouter = (): ReactElement => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/projects/:projectId/:entrepreneurId" element={<ProjectPage/>}/>
+        <Route
+          path="/projects/:projectId/:entrepreneurId"
+          element={<ProjectPage />}
+        />
         <Route path="/explore" element={<Explore />} />
+        <Route path="/social" element={<EventsPage />} />
+        <Route path="/moderator" element={<ApproveProjectPage />} />
       </Route>
       <Route
         element={
