@@ -69,11 +69,11 @@ Hola, esto es de prueba
     return(
         <div className="flex flex-col m-24 gap-16">
             <div className="flex flex-col gap-10 justify-center items-center overflow-hidden w-[65%]">
-                <img className="h-80 w-full rounded-3xl object-cover" src={primaryImage} alt="" />
+                <img className="h-[500px] w-full rounded-3xl object-cover" src={primaryImage} alt="" />
                 <div className="flex flex-row gap-5 overflow-hidden w-full justify-between">
-                    <img className="h-24 w-full rounded-lg object-cover" src={secondaryImages[0]} alt="image" onClick={() => handleChangeImage(0, secondaryImages[0])}/>
-                    <img className="h-24 w-full rounded-lg object-cover" src={secondaryImages[1]} alt="image" onClick={() => handleChangeImage(1, secondaryImages[1])}/>
-                    <img className="h-24 w-full rounded-lg object-cover" src={secondaryImages[2]} alt="image" onClick={() => handleChangeImage(2, secondaryImages[2])}/>
+                    <img className="h-56 w-full rounded-lg object-cover" src={secondaryImages[0]} alt="image" onClick={() => handleChangeImage(0, secondaryImages[0])}/>
+                    <img className="h-56 w-full rounded-lg object-cover" src={secondaryImages[1]} alt="image" onClick={() => handleChangeImage(1, secondaryImages[1])}/>
+                    <img className="h-56 w-full rounded-lg object-cover" src={secondaryImages[2]} alt="image" onClick={() => handleChangeImage(2, secondaryImages[2])}/>
                 </div>
             </div>
             <div className="border-y-2 border-light w-[65%] py-5">
