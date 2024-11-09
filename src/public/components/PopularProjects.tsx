@@ -35,7 +35,7 @@ export const PopularProjects = (): ReactElement => {
         />
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
           {" "}
-          {projects.map((project, index) => (
+          {projects && projects.map((project, index) => (
             <ProjectCard
               key={index}
               projectId={project.id}

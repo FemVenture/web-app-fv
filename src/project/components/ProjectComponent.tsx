@@ -130,7 +130,7 @@ export const ProjectComponent = (): ReactElement => {
                             <hr className="border-t-2 border-red-300 mb-10 max-w-[365px]" />
                         </span>
                         {
-                            projects
+                            projects && projects
                             .filter(project => project.id.toString() !== projectId)
                             .map(project => (
                                 <ProjectCard key={project.id} Project={project} />

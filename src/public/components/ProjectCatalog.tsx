@@ -69,7 +69,7 @@ export const ProjectCatalog = (): ReactElement => {
       </div>
 
       <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        {filteredProjects.map((project, index) => (
+        {filteredProjects && filteredProjects.map((project, index) => (
           <ProjectCard
             key={index}
             projectId={project.id}
