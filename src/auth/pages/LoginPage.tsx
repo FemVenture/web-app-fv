@@ -1,10 +1,11 @@
 import { ReactElement } from "react";
-
+import { BaseLayout } from "../../shared/layouts/BaseLayout";
+import { LoginForm } from "../components/LoginForm";
 
 export const Login = (): ReactElement => {
-    return (
-        <div>
-            <h1>Login</h1>
-        </div>
-    );
-}
+  return (
+    <BaseLayout>
+      <LoginForm></LoginForm>
+    </BaseLayout>
+  );
+};

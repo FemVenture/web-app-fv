@@ -1,9 +1,11 @@
 import { ReactElement } from "react";
+import { RegisterForm } from "../components/RegisterForm";
+import { BaseLayout } from "../../shared/layouts/BaseLayout";
 
-export const Register = ():ReactElement => {
-    return (
-        <div>
-            <h1>Register</h1>
-        </div>
-    );
-}
+export const Register = (): ReactElement => {
+  return (
+    <BaseLayout>
+      <RegisterForm></RegisterForm>
+    </BaseLayout>
+  );
+};
